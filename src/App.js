@@ -3,48 +3,49 @@ import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const res = await fetch(`https://reqres.in/api/users/`);
-      const json = await res.json();
-      setUsers(json.data);
-    };
-    getUsers();
-  }, []);
-  console.log(users);
-  const handlePageClick = (users) => {
-    fetch(`https://reqres.in/api/users/?id=${users.selected}`)
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const res = await fetch(`https://reqres.in/api/users/`);
+  //     const json = await res.json();
+  //     setUsers(json.data);
+  //   };
+  //   getUsers();
+  // }, []);
+  // console.log(users);
+  const handlePageClick = (singleUser) => {
+    fetch(`https://reqres.in/api/users/?id=${singleUser.selected}`)
       .then((res) => res.json())
       .then((json) => {
         console.log(json.data);
-        const markup = json.data.map((el) => {
-          return ` <div key={el.id}>
-        <div className="card align-items-center mb-3">
-          <img
-            key=${el.avatar}
-            src=${el.avatar}
-            className="card-img-top"
-            alt="user photograph"
-          />
-          <div className="card-body">
-            <h3 className="card-title">
-              ${el.first_name + el.last_name}
-            </h3>
-            <p>${el.email}</p>
-            <p>${el.id}</p>
-          </div>
-        </div>
-      </div>
-      `;
+        users.map((el) => {
+          return (
+            <div key={el.id}>
+              <div className="card align-items-center mb-3">
+                <img
+                  key={el.avatar}
+                  src={el.avatar}
+                  className="card-img-top"
+                  alt="user photograph"
+                />
+                <div className="card-body">
+                  <h3 className="card-title">
+                    ${el.first_name + el.last_name}
+                  </h3>
+                  <p>${el.email}</p>
+                  <p>${el.id}</p>
+                </div>
+              </div>
+            </div>
+          );
         });
       });
   };
 
   return (
     <div>
-      {users.map((user) => {
+      {/* {users.map((user) => {
         return (
           <div key={user.id}>
             <div className="card align-items-center mb-3">
@@ -64,7 +65,7 @@ function App() {
             </div>
           </div>
         );
-      })}
+      })} */}
 
       <ReactPaginate
         previousLabel="<<"
