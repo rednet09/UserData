@@ -3,17 +3,17 @@ import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
 
 function App() {
-  // const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     const res = await fetch(`https://reqres.in/api/users/`);
-  //     const json = await res.json();
-  //     setUsers(json.data);
-  //   };
-  //   getUsers();
-  // }, []);
-  // console.log(users);
+  useEffect(() => {
+    const getUsers = async () => {
+      const res = await fetch(`https://reqres.in/api/users/`);
+      const json = await res.json();
+      setUsers(json.data);
+    };
+    getUsers();
+  }, []);
+  console.log(users);
   const handlePageClick = (singleUser) => {
     fetch(`https://reqres.in/api/users/?id=${singleUser.selected}`)
       .then((res) => res.json())
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div>
-      {/* {users.map((user) => {
+      {users.map((user) => {
         return (
           <div key={user.id}>
             <div className="card align-items-center mb-3">
@@ -65,7 +65,7 @@ function App() {
             </div>
           </div>
         );
-      })} */}
+      })}
 
       <ReactPaginate
         previousLabel="<<"
